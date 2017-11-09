@@ -3,5 +3,5 @@ project(Algorithms)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c)
+set(SOURCE_FILES main.c LinkedList.h LinkedList.c)
 add_executable(Algorithms ${SOURCE_FILES})
