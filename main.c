@@ -17,6 +17,11 @@ int main() {
     first->next = second;
     second->next = third;
 
+    list *p = insert_list(start,0,55);
+    if (p) {
+        printf("%d\n",p->data);
+    }
+
     traverse(start);
 
     return 0;

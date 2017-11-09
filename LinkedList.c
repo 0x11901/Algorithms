@@ -26,18 +26,33 @@ struct list *insert_list(struct list *ls, int n, int data) {
     while (p && n--) {
         p = p->next;
     }
-    if (p) {
+    if (!p)
+        return NULL;
+    else {
         list *node = create_list();
         node->data = data;
         node->next = p->next;
         p->next = node;
-        return p;
-    }else{
-        return NULL;
+        return node;
     }
 }
 
-int delete_list(struct list *ls, int n);//删除指定位置元素
+/*删除指定位置元素*/
+int delete_list(struct list *ls, int n) {
+    list *p = ls;
+    while (p && n--) {
+        p = p->next;
+    }
+    if (!p)
+        return 0;
+    list *node = p->next;
+    if (!node)
+        return 0;
+    p->next = node->next;
+    free(node);
+    return 1;
+}
+
 int count_list(struct list *ls);//返回链表元素个数
 void clear_list(struct list *ls);//清空链表，只保留首节点
 int empty_list(struct list *ls);//返回链表是否为空
