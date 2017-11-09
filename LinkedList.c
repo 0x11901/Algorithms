@@ -15,12 +15,28 @@ struct list *create_list() {
 void traverse(struct list *ls) {
     struct list *p = ls->next;
     while (p) {
-        printf("%d",p->data);
-       p = p->next;
+        printf("%d\n",p->data);
+        p = p->next;
     }
 }
 
-struct list *insert_list(struct list *ls, int n, int data);//在指定位置插入元素
+/*在指定位置插入元素*/
+struct list *insert_list(struct list *ls, int n, int data) {
+    list *p = ls;
+    while (p && n--) {
+        p = p->next;
+    }
+    if (p) {
+        list *node = create_list();
+        node->data = data;
+        node->next = p->next;
+        p->next = node;
+        return p;
+    }else{
+        return NULL;
+    }
+}
+
 int delete_list(struct list *ls, int n);//删除指定位置元素
 int count_list(struct list *ls);//返回链表元素个数
 void clear_list(struct list *ls);//清空链表，只保留首节点
