@@ -40,7 +40,7 @@ struct list *insert_list(struct list *ls, int n, int data) {
 /*删除指定位置元素*/
 int delete_list(struct list *ls, int n) {
     list *p = ls;
-    while (p && n--) {
+    while (p && --n) {
         p = p->next;
     }
     if (!p)
@@ -53,8 +53,32 @@ int delete_list(struct list *ls, int n) {
     return 1;
 }
 
-int count_list(struct list *ls);//返回链表元素个数
-void clear_list(struct list *ls);//清空链表，只保留首节点
+/*返回链表元素个数*/
+int count_list(struct list *ls) {
+    list *p = ls->next;
+    int len = 0;
+    while (p) {
+        len++;
+        p = p->next;
+    }
+    return len;
+}
+
+/*清空链表，只保留首节点*/
+void clear_list(struct list *ls) {
+    list *s = ls;
+    list *p = ls->next;
+    list *n = p->next;
+    if (!s->next)
+        return;
+    while (n) {
+        free(p);
+        p = n;
+        n = n->next;
+    }
+    s->next = NULL;
+}
+
 int empty_list(struct list *ls);//返回链表是否为空
 struct list *locale_list(struct list *ls, int n);//返回链表指定位置的节点
 struct list *elem_locale(struct list *ls, int data);//返回数据域等于data的节点

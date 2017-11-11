@@ -4,24 +4,22 @@
 int main() {
     //test linked list
     list *start = create_list();
-    list *first = create_list();
-    list *second = create_list();
-    list *third = create_list();
 
-    start->data = 1984;
-    first->data = 1;
-    second->data = 2;
-    third->data = 3;
-
-    start->next = first;
-    first->next = second;
-    second->next = third;
-
-    list *p = insert_list(start,0,55);
-    if (p) {
-        printf("%d\n",p->data);
+    for (int i = 0; i < 10; ++i) {
+        insert_list(start,i,i + 1);
     }
 
+    delete_list(start,1);
+    delete_list(start,9);
+
+    printf("%d\n",count_list(start));
+
+    traverse(start);
+
+    clear_list(start);
+    traverse(start);
+
+    clear_list(start);
     traverse(start);
 
     return 0;
