@@ -79,9 +79,36 @@ void clear_list(struct list *ls) {
     s->next = NULL;
 }
 
-int empty_list(struct list *ls);//返回链表是否为空
-struct list *locale_list(struct list *ls, int n);//返回链表指定位置的节点
-struct list *elem_locale(struct list *ls, int data);//返回数据域等于data的节点
+/*返回链表是否为空*/
+int empty_list(struct list *ls) {
+    return ls->next == NULL ? 0 : 1;
+}
+
+/*返回链表指定位置的节点*/
+struct list *locale_list(struct list *ls, int n) {
+    list *p = ls;
+    while (p && n--) {
+        p = p->next;
+    }
+    if (!p)
+        return NULL;
+    return p;
+}
+
+/*返回数据域等于data的节点*/
+struct list *elem_locale(struct list *ls, int data) {
+    list *p = ls->next;
+    int n = 1;
+    while (p) {
+        if (p->data == data)
+            return p;
+        p = p->next;
+        n++;
+    }
+    return NULL;
+}
+
+
 int elem_pos(struct list *ls, int data);//返回数据域等于data的节点位置
 struct list *last_list(struct list *ls);//得到链表最后一个节点
 void merge_list(struct list *ls1, struct list *ls2);//合并两个链表,结果放入st1中
