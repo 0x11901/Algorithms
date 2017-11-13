@@ -66,11 +66,11 @@ int count_list(struct list *ls) {
 
 /*清空链表，只保留首节点*/
 void clear_list(struct list *ls) {
+    if (!ls->next)
+        return;
     list *s = ls;
     list *p = ls->next;
     list *n = p->next;
-    if (!s->next)
-        return;
     while (n) {
         free(p);
         p = n;
@@ -108,8 +108,53 @@ struct list *elem_locale(struct list *ls, int data) {
     return NULL;
 }
 
+/*返回数据域等于data的节点位置*/
+int elem_pos(struct list *ls, int data) {
+    list *p = ls;
+    int n = 0;
+    while (p) {
+        if (data == p->data)
+            return n;
+        n++;
+        p = p->next;
+    }
+    return -1;
+}
 
-int elem_pos(struct list *ls, int data);//返回数据域等于data的节点位置
-struct list *last_list(struct list *ls);//得到链表最后一个节点
-void merge_list(struct list *ls1, struct list *ls2);//合并两个链表,结果放入st1中
-void reverse(struct list *ls);//链表逆置
+/*得到链表最后一个节点*/
+struct list *last_list(struct list *ls) {
+    list *p = ls;
+    while (p) {
+        p = p->next;
+    }
+    return p;
+}
+
+/*合并两个链表,结果放入ls1中*/
+void merge_list(struct list *ls1, struct list *ls2) {
+    if (!ls2->next)
+        return;
+    list *p = ls1;
+    list *pre = p;
+    while (p) {
+        pre = p;
+        p = p->next;
+    }
+    pre->next = ls2->next;
+}
+
+/*链表逆置*/
+void reverse(struct list *ls) {
+    if (!ls->next)
+        return;
+    list *s = ls;
+    list *p = ls;
+    list *n = ls->next;
+    while (p) {
+        p->next = p;
+        p = n;
+        n = n->next;
+    }
+    s->next->next = NULL;
+    s->next = p;
+}

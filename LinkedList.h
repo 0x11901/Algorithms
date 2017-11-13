@@ -23,5 +23,5 @@ struct list *locale_list(struct list *ls, int n);//返回链表指定位置的�
 struct list *elem_locale(struct list *ls, int data);//返回数据域等于data的节点
 int elem_pos(struct list *ls, int data);//返回数据域等于data的节点位置
 struct list *last_list(struct list *ls);//得到链表最后一个节点
-void merge_list(struct list *ls1, struct list *ls2);//合并两个链表,结果放入st1中
+void merge_list(struct list *ls1, struct list *ls2);//合并两个链表,结果放入ls1中
 void reverse(struct list *ls);//链表逆置
