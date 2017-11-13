@@ -33,6 +33,7 @@ int main() {
 
     reverse(start);
 
+
     traverse(start);
 
     clear_list(start);

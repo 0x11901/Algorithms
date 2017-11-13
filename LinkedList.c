@@ -148,13 +148,15 @@ void reverse(struct list *ls) {
     if (!ls->next)
         return;
     list *s = ls;
-    list *p = ls;
-    list *n = ls->next;
-    while (p) {
-        p->next = p;
-        p = n;
-        n = n->next;
+    list *pre = ls;
+    list *cur = ls->next;
+    list *nex = ls->next->next;
+    while (cur) {
+        pre = cur;
+        cur = cur->next;
+        cur->next = pre;
+        nex = nex->next;
     }
     s->next->next = NULL;
-    s->next = p;
+    s->next = cur;
 }
