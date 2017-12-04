@@ -1,8 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "LinkedList.h"
+#include <string.h>
 
-int main() {
+#include "LinkedList.h"
+#include "des.h"
+
+#define MAX_LENGTH 1024
+
+
+void swap(int *x,int *y);
+
+int mian() {
+    int res = test_linked_list();
+//    int res = test_des();
+    return res;
+}
+
+int test_des() {
+    char *plain = "hello world!";
+    size_t length = strlen(plain);
+    char *crypdata[MAX_LENGTH] = {0};
+    int cryplen = -2;
+    int res_enc =  DesEnc(plain,length,crypdata,&cryplen);
+    if (res_enc != 0) {
+        printf("des_enc err(%d)\n",res_enc);
+        return -1;
+    }
+
+    char *decode[MAX_LENGTH];
+    int decode_len = -1;
+    int  res_dec = DesDec(crypdata,cryplen,decode,&decode_len);
+    if (res_dec !=0) {
+        printf("des_dec err(%d)\n",res_enc);
+        return -1;
+    }
+
+    if (cryplen != decode_len) {
+       printf("两次明文长度不同");
+        return -1;
+    }
+    if (memcmp(plain,decode,cryplen) != 0){
+        printf("加解密后内容不同");
+        return -1;
+    }
+    printf("before: %s\nafter:\n%s\n",plain,decode);
+
+    return 0;
+}
+
+int test_linked_list() {
     //test linked list
     list *start = create_list();
 
