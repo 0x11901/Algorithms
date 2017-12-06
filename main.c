@@ -1,51 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include "LinkedList.h"
-#include "des.h"
 
-#define MAX_LENGTH 1024
+int test_linked_list();
 
-
-void swap(int *x,int *y);
-
-int mian() {
+int main() {
     int res = test_linked_list();
-//    int res = test_des();
     return res;
-}
-
-int test_des() {
-    char *plain = "hello world!";
-    size_t length = strlen(plain);
-    char *crypdata[MAX_LENGTH] = {0};
-    int cryplen = -2;
-    int res_enc =  DesEnc(plain,length,crypdata,&cryplen);
-    if (res_enc != 0) {
-        printf("des_enc err(%d)\n",res_enc);
-        return -1;
-    }
-
-    char *decode[MAX_LENGTH];
-    int decode_len = -1;
-    int  res_dec = DesDec(crypdata,cryplen,decode,&decode_len);
-    if (res_dec !=0) {
-        printf("des_dec err(%d)\n",res_enc);
-        return -1;
-    }
-
-    if (cryplen != decode_len) {
-       printf("两次明文长度不同");
-        return -1;
-    }
-    if (memcmp(plain,decode,cryplen) != 0){
-        printf("加解密后内容不同");
-        return -1;
-    }
-    printf("before: %s\nafter:\n%s\n",plain,decode);
-
-    return 0;
 }
 
 int test_linked_list() {
@@ -53,11 +15,13 @@ int test_linked_list() {
     list *start = create_list();
 
     for (int i = 0; i < 10; ++i) {
-        insert_list(start,i,i + 1);
+        insert_list(start,i,i);
     }
 
-    delete_list(start,1);
+    delete_list(start,5);
     delete_list(start,9);
+
+    insert_list(start,2,100);
 
     printf("count is :%d\n",count_list(start));
 

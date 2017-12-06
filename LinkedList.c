@@ -13,6 +13,7 @@ struct list *create_list() {
 
 /*循环遍历链表*/
 void traverse(struct list *ls) {
+    if (!ls) return;
     struct list *p = ls->next;
     while (p) {
         printf("%d\n",p->data);
@@ -20,10 +21,10 @@ void traverse(struct list *ls) {
     }
 }
 
-/*在指定位置插入元素*/
+/*在指定位置插入元素，在节点n之前插入节点，节点内容域为data*/
 struct list *insert_list(struct list *ls, int n, int data) {
     list *p = ls;
-    while (p && n--) {
+    while (p && --n) {
         p = p->next;
     }
     if (!p)
@@ -44,13 +45,13 @@ int delete_list(struct list *ls, int n) {
         p = p->next;
     }
     if (!p)
-        return 0;
+        return -1;
     list *node = p->next;
     if (!node)
-        return 0;
+        return -1;
     p->next = node->next;
     free(node);
-    return 1;
+    return 0;
 }
 
 /*返回链表元素个数*/
@@ -66,17 +67,15 @@ int count_list(struct list *ls) {
 
 /*清空链表，只保留首节点*/
 void clear_list(struct list *ls) {
-    if (!ls->next)
-        return;
-    list *s = ls;
+    if (!ls->next) return;
     list *p = ls->next;
-    list *n = p->next;
-    while (n) {
+    list *temp = NULL;
+    while (p) {
+        temp = p->next;
         free(p);
-        p = n;
-        n = n->next;
+        p = temp;
     }
-    s->next = NULL;
+    ls->next = NULL;
 }
 
 /*返回链表是否为空*/
@@ -145,7 +144,7 @@ void merge_list(struct list *ls1, struct list *ls2) {
 
 /*链表逆置*/
 void reverse(struct list *ls) {
-    if (!ls->next)
+    if (!ls || !ls->next || !ls->next->next)
         return;
     list *s = ls;
     list *pre = NULL;
@@ -158,4 +157,17 @@ void reverse(struct list *ls) {
         cur = next;
     }
     s->next = pre;
+    /*
+    list *t = NULL,*p =NULL,*q = NULL;
+    p = ls->next;
+    q = ls->next->next;
+    while (!q) {
+        t = q->next;
+        q->next = p;
+        p = q;
+        q = t;
+    }
+    ls->next->next = NULL;
+    ls->next = p;
+     */
 }
