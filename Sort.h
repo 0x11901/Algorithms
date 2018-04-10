@@ -5,5 +5,4 @@
 #ifndef ALGORITHMS_SORT_H
 #define ALGORITHMS_SORT_H
 
-#endif //ALGORITHMS_SORT_H
-
+#endif // ALGORITHMS_SORT_H
