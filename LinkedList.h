@@ -8,8 +8,8 @@
 #endif // ALGORITHMS_LINKEDLIST_H
 
 typedef struct list {
-  int data;
-  struct list *next;
+    int data;
+    struct list *next;
 } list;
 
 struct list *create_list();                                 //建立一个节点
