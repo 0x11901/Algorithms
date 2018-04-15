@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "SeqList.h"
 #include "LinkedList.h"
+#include "SeqList.h"
 
 typedef struct {
     int data;
@@ -18,7 +18,37 @@ int main() {
     return res;
 }
 
-int test_linked_list() { return 0; }
+int test_linked_list() {
+    Data t1, t2, t3;
+
+    LinkedList *list = NULL;
+    t1.data = 31;
+    t2.data = 32;
+    t3.data = 33;
+
+    list = LinkedList_Create();
+
+    LinkedList_Insert(list, (LinkedListNode *)&t1, LinkedList_Length(list));
+    LinkedList_Insert(list, (LinkedListNode *)&t2, LinkedList_Length(list));
+    LinkedList_Insert(list, (LinkedListNode *)&t3, LinkedList_Length(list));
+
+    for (int i = 0; i < LinkedList_Length(list); i++) {
+        Data *tmp = (Data *)LinkedList_Get(list, i);
+        if (tmp != NULL) {
+            printf("age:%d ", tmp->data);
+        }
+    }
+
+    while (LinkedList_Length(list) > 0) {
+        Data *tmp = (Data *)LinkedList_Delete(list, 0);
+        if (tmp != NULL) {
+//            printf("age:%d ", tmp->data);
+        }
+    }
+
+    LinkedList_Destroy(list);
+    return 0;
+}
 
 int test_seq_lise() {
     SeqList *list = NULL;
