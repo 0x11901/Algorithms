@@ -5,7 +5,6 @@
 #include "SeqList.h"
 
 typedef struct {
-    Node *next;
     int data;
 } Data;
 
@@ -29,9 +28,9 @@ int test_seq_lise() {
 
     list = SeqList_Create(10);
     int length = SeqList_Length(list);
-    SeqList_Insert(list, (Node *)&d1, length);
-    SeqList_Insert(list, (Node *)&d2, length);
-    SeqList_Insert(list, (Node *)&d3, length);
+    SeqList_Insert(list, &d1, length);
+    SeqList_Insert(list, &d2, length);
+    SeqList_Insert(list, &d3, length);
     for (int i = 0; i < SeqList_Length(list); ++i) {
         Data *data = SeqList_Get(list, i);
         if (data != NULL) {

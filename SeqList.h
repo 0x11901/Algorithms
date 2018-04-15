@@ -5,12 +5,6 @@
 #ifndef ALGORITHMS_SEQLIST_H
 #define ALGORITHMS_SEQLIST_H
 
-#include "stdio.h"
-
-typedef struct Node {
-    struct Node *next;
-} Node;
-
 typedef void SeqList;
 typedef void SeqListNode;
 
