@@ -45,6 +45,7 @@ int test_seq_lise() {
         }
     }
 
+    printf("length is %d\n", SeqList_Length(list));
     SeqList_Destroy(list);
     return 0;
 }
