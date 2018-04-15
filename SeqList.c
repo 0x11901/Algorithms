@@ -59,11 +59,51 @@ int SeqList_Capacity(SeqList *list) {
 }
 
 int SeqList_Insert(SeqList *list, SeqListNode *node, int pos) {
-    for (int i = SeqList_Length(list); i < pos; --i) {
+    if (node == NULL || list == NULL) {
+        return -1;
     }
+    TSeaList *t = list;
+    if (pos < 0 || pos >= t->capacity) {
+        return -1;
+    }
+    int length = SeqList_Length(list);
+    if (pos > length) {
+        pos = SeqList_Length(list);
+    }
+
+    for (int i = SeqList_Length(list); i < pos; --i) {
+        t->node[i] = t->node[i - 1];
+    }
+    t->node[pos] = (unsigned int) node;
+    t->length++;
     return 0;
 }
 
-SeqListNode *SeqList_Get(SeqList *list, int pos) { return NULL; }
+SeqListNode *SeqList_Get(SeqList *list, int pos) {
+    SeqList *res = NULL;
+    if (list == NULL) {
+        return res;
+    }
+    TSeaList *t = list;
+    if (pos < 0 || pos > t->length - 1) {
+        return NULL;
+    }
+    return (void *) t->node[pos];
+}
 
-SeqListNode *SeqList_Delete(SeqList *list, int pos) { return NULL; }
+SeqListNode *SeqList_Delete(SeqList *list, int pos) {
+    SeqList *res = NULL;
+    if (list == NULL) {
+        return res;
+    }
+    TSeaList *t = list;
+    if (pos < 0 || pos > t->length - 1) {
+        return NULL;
+    }
+    res = (void *) t->node[pos];
+    do {
+        t->node[pos] = t->node[pos + 1];
+    } while (t->node[pos + 1]);
+    t->length--;
+    return res;
+}
