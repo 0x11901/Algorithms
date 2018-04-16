@@ -14,9 +14,7 @@ typedef struct _tag_LinkList {
 LinkedList *LinkedList_Create() { return calloc(1, sizeof(TLinkedList)); }
 
 void LinkedList_Destroy(LinkedList *list) {
-    if (list) {
-        free(list);
-    }
+    if (list) free(list);
 }
 
 void LinkedList_Clear(LinkedList *list) {
@@ -26,8 +24,7 @@ void LinkedList_Clear(LinkedList *list) {
 }
 
 int LinkedList_Length(LinkedList *list) {
-    if (list == NULL)
-        return 0;
+    if (list == NULL) return 0;
     return ((TLinkedList *)list)->length;
 }
 
@@ -38,13 +35,9 @@ int LinkedList_Insert(LinkedList *list, LinkedListNode *node, int pos) {
         return -2;
     }
     TLinkedList *t = list;
-    if (pos > t->length) {
-        pos = t->length;
-    }
+    if (pos > t->length) { pos = t->length; }
     LinkedListNode *p = &(t->header);
-    while (p->next && pos--) {
-        p = p->next;
-    }
+    while (p->next && pos--) { p = p->next; }
     node->next = p->next;
     p->next = node;
     ++t->length;
@@ -55,9 +48,7 @@ LinkedListNode *LinkedList_Get(LinkedList *list, int pos) {
     if (list && pos > -1) {
         TLinkedList *t = list;
         LinkedListNode *p = &(t->header);
-        while (p->next && pos--) {
-            p = p->next;
-        }
+        while (p->next && pos--) { p = p->next; }
         return p;
     }
     return NULL;
