@@ -7,8 +7,8 @@
 #include <stdlib.h>
 
 typedef struct _tag_SeqList {
-    int capacity;
-    int length;
+    int            capacity;
+    int            length;
     unsigned long *node;
 } TSeqList;
 
@@ -17,13 +17,13 @@ SeqList *SeqList_Create(int capacity) {
         return NULL;
     }
     TSeqList *res = NULL;
-    res = (TSeqList *)calloc(1, sizeof(TSeqList) + capacity * sizeof(unsigned long));
+    res           = (TSeqList *)calloc(1, sizeof(TSeqList) + capacity * sizeof(unsigned long));
     if (res == NULL) {
         return NULL;
     }
-    res->node = (unsigned long *)(res + 1);
+    res->node     = (unsigned long *)(res + 1);
     res->capacity = capacity;
-    res->length = 0;
+    res->length   = 0;
     return res;
 }
 
@@ -38,7 +38,7 @@ void SeqList_Clear(SeqList *list) {
         return;
     }
     TSeqList *t = (TSeqList *)list;
-    t->length = 0;
+    t->length   = 0;
 }
 
 int SeqList_Length(SeqList *list) {
@@ -83,8 +83,8 @@ int SeqList_Insert(SeqList *list, SeqListNode *node, int pos) {
 
 SeqListNode *SeqList_Get(SeqList *list, int pos) {
     SeqListNode *ret = NULL;
-    TSeqList *t = NULL;
-    t = (TSeqList *)list;
+    TSeqList *   t   = NULL;
+    t                = (TSeqList *)list;
     if (list == NULL || pos < 0 || pos >= t->length) {
         return NULL;
     }

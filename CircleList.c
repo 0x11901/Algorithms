@@ -7,9 +7,9 @@
 #include <stdlib.h>
 
 typedef struct _tag_CircleList {
-    CircleListNode header;
+    CircleListNode  header;
     CircleListNode *slider;
-    int length;
+    int             length;
 } TCircleList;
 
 CircleList *CircleList_Create() {
@@ -18,9 +18,9 @@ CircleList *CircleList_Create() {
         return NULL;
     }
 
-    ret->length = 0;
+    ret->length      = 0;
     ret->header.next = NULL;
-    ret->slider = NULL;
+    ret->slider      = NULL;
     return ret;
 }
 
@@ -38,15 +38,15 @@ void CircleList_Clear(CircleList *list) // O(1)
     if (sList == NULL) {
         return;
     }
-    sList->length = 0;
+    sList->length      = 0;
     sList->header.next = NULL;
-    sList->slider = NULL;
+    sList->slider      = NULL;
 }
 
 int CircleList_Length(CircleList *list) // O(1)
 {
     TCircleList *sList = (TCircleList *)list;
-    int ret = -1;
+    int          ret   = -1;
     if (list == NULL) {
         return ret;
     }
@@ -56,7 +56,7 @@ int CircleList_Length(CircleList *list) // O(1)
 
 int CircleList_Insert(CircleList *list, CircleListNode *node, int pos) // O(n)
 {
-    int ret = 0, i = 0;
+    int          ret = 0, i = 0;
     TCircleList *sList = (TCircleList *)list;
 
     if (list == NULL || node == NULL || pos < 0) {
@@ -71,8 +71,8 @@ int CircleList_Insert(CircleList *list, CircleListNode *node, int pos) // O(n)
         }
 
         // current->next 0号节点的地址
-        node->next = current->next; // 1
-        current->next = node;       // 2
+        node->next    = current->next; // 1
+        current->next = node;          // 2
 
         //若第一次插入节点
         if (sList->length == 0) {
@@ -85,7 +85,7 @@ int CircleList_Insert(CircleList *list, CircleListNode *node, int pos) // O(n)
         if (current == (CircleListNode *)sList) {
             //获取最后一个元素
             CircleListNode *last = CircleList_Get(sList, sList->length - 1);
-            last->next = current->next; // 3
+            last->next           = current->next; // 3
         }
     }
 
@@ -94,9 +94,9 @@ int CircleList_Insert(CircleList *list, CircleListNode *node, int pos) // O(n)
 
 CircleListNode *CircleList_Get(CircleList *list, int pos) // O(n)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
-    int i = 0;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
+    int             i     = 0;
 
     if (list == NULL || pos < 0) {
         return NULL;
@@ -117,13 +117,13 @@ CircleListNode *CircleList_Get(CircleList *list, int pos) // O(n)
 
 CircleListNode *CircleList_Delete(CircleList *list, int pos) // O(n)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
-    int i = 0;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
+    int             i     = 0;
 
     if ((sList != NULL) && (pos >= 0) && (sList->length > 0)) {
         CircleListNode *current = (CircleListNode *)sList;
-        CircleListNode *last = NULL;
+        CircleListNode *last    = NULL;
 
         for (i = 0; i < pos; i++) {
             current = current->next;
@@ -135,7 +135,7 @@ CircleListNode *CircleList_Delete(CircleList *list, int pos) // O(n)
         }
 
         //求要删除的元素
-        ret = current->next;
+        ret           = current->next;
         current->next = ret->next;
 
         sList->length--;
@@ -143,7 +143,7 @@ CircleListNode *CircleList_Delete(CircleList *list, int pos) // O(n)
         //判断链表是否为空
         if (last != NULL) {
             sList->header.next = ret->next;
-            last->next = ret->next;
+            last->next         = ret->next;
         }
 
         //若删除的元素为游标所指的元素
@@ -154,7 +154,7 @@ CircleListNode *CircleList_Delete(CircleList *list, int pos) // O(n)
         //若删除元素后，链表长度为0
         if (sList->length == 0) {
             sList->header.next = NULL;
-            sList->slider = NULL;
+            sList->slider      = NULL;
         }
     }
 
@@ -163,9 +163,9 @@ CircleListNode *CircleList_Delete(CircleList *list, int pos) // O(n)
 
 CircleListNode *CircleList_DeleteNode(CircleList *list, CircleListNode *node) // O(n)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
-    int i = 0;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
+    int             i     = 0;
 
     if (sList != NULL) {
         CircleListNode *current = (CircleListNode *)sList;
@@ -191,12 +191,12 @@ CircleListNode *CircleList_DeleteNode(CircleList *list, CircleListNode *node) //
 
 CircleListNode *CircleList_Reset(CircleList *list) // O(1)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
 
     if (sList != NULL) {
         sList->slider = sList->header.next;
-        ret = sList->slider;
+        ret           = sList->slider;
     }
 
     return ret;
@@ -204,8 +204,8 @@ CircleListNode *CircleList_Reset(CircleList *list) // O(1)
 
 CircleListNode *CircleList_Current(CircleList *list) // O(1)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
 
     if (sList != NULL) {
         ret = sList->slider;
@@ -216,11 +216,11 @@ CircleListNode *CircleList_Current(CircleList *list) // O(1)
 
 CircleListNode *CircleList_Next(CircleList *list) // O(1)
 {
-    TCircleList *sList = (TCircleList *)list;
-    CircleListNode *ret = NULL;
+    TCircleList *   sList = (TCircleList *)list;
+    CircleListNode *ret   = NULL;
 
     if ((sList != NULL) && (sList->slider != NULL)) {
-        ret = sList->slider;
+        ret           = sList->slider;
         sList->slider = ret->next;
     }
 

@@ -6,7 +6,7 @@
 
 typedef struct {
     LinkedListNode *node;
-    int data;
+    int             data;
 } Data;
 
 int test_linked_list();
@@ -14,7 +14,7 @@ int test_seq_lise();
 
 int main() {
     int res = -1;
-    res = test_linked_list();
+    res     = test_linked_list();
     //    res = test_seq_lise();
     return res;
 }
@@ -23,9 +23,9 @@ int test_linked_list() {
     Data t1, t2, t3;
 
     LinkedList *list = NULL;
-    t1.data = 31;
-    t2.data = 32;
-    t3.data = 33;
+    t1.data          = 31;
+    t2.data          = 32;
+    t3.data          = 33;
 
     list = LinkedList_Create();
 
@@ -59,7 +59,7 @@ int test_seq_lise() {
     d2.data = 2;
     d3.data = 3;
 
-    list = SeqList_Create(10);
+    list       = SeqList_Create(10);
     int length = SeqList_Length(list);
     SeqList_Insert(list, &d1, length);
     SeqList_Insert(list, &d2, length);
