@@ -3,5 +3,5 @@ project(Algorithms)
 
 set(CMAKE_C_STANDARD 99)
 
-set(SOURCE_FILES main.c Sort.c Sort.h SeqList.c SeqList.h LinkedList.c LinkedList.h CircleList.c CircleList.h DoublyLinkedList.c DoublyLinkedList.h)
+set(SOURCE_FILES main.c Sort.c Sort.h SeqList.c SeqList.h LinkedList.c LinkedList.h CircleList.c CircleList.h DoublyLinkedList.c DoublyLinkedList.h LinkedStack.c LinkedStack.h)
 add_executable(Algorithms ${SOURCE_FILES})
