@@ -21,3 +21,6 @@ cabal.project.local~
 
 # idea
 Functional.iml
+
+# vs code
+.vscode

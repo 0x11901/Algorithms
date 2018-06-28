@@ -1,7 +1,7 @@
 module Main where
 
 main :: IO ()
-main = putStrLn "hello world!"
+main = putStrLn "no head feelings"
 
 power :: Int -> Int -> Int
 power 0 0 = 1
