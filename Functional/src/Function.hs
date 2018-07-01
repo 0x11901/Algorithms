@@ -1,3 +1,3 @@
--- module Function where
+module Function where
 
--- area r = pi * r ^ 2
+area r = pi * r ^ 2
