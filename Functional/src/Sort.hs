@@ -31,3 +31,10 @@ bubbleSort'' xs = bubbleSort'' initialElements ++ [lastElement]
     swappedxs       = swaps xs
     initialElements = init swappedxs
     lastElement     = last swappedxs
+
+quickSort :: Ord a => [a] -> [a]
+quickSort []       = []
+quickSort (x : xs) = quickSort mini ++ [x] ++ quickSort maxi
+  where
+    mini = filter (< x) xs
+    maxi = filter (>= x) xs
