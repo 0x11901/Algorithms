@@ -38,3 +38,18 @@ quickSort (x : xs) = quickSort mini ++ [x] ++ quickSort maxi
   where
     mini = filter (< x) xs
     maxi = filter (>= x) xs
+
+merge :: Ord a => [a] -> [a] -> [a]
+merge xs [] = xs
+merge [] ys = ys
+merge (x : xs) (y : ys) | x > y     = y : merge (x : xs) ys
+                        | otherwise = x : merge xs (y : ys)
+
+mergeSort :: Ord a => [a] -> [a]
+mergeSort []  = []
+mergeSort [x] = [x]
+mergeSort xs  = merge (mergeSort x1) (mergeSort x2)
+  where
+    (x1, x2) = halve xs
+    halve xs = (take l xs, drop l xs)
+    l = length xs `div` 2
