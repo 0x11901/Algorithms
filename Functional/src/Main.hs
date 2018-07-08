@@ -204,3 +204,18 @@ halt :: Integral a => a -> [a]
 halt 1 = [1]
 halt n | even n    = let n' = div n 2 in n' : halt n'
        | otherwise = let n' = 3 * n + 1 in n' : halt n'
+
+squareroot :: Int -> Double -> Double
+squareroot 0 x = x
+squareroot n x = (squareroot (n - 1) x + x / squareroot (n - 1) x) / 2
+
+fix' :: (t -> t -> Bool) -> (t -> t) -> t -> t
+fix' c f x | c x (f x) = x
+           | otherwise = fix' c f (f x)
+
+newton :: Fractional a => a -> a -> a
+newton c t = (c / t + t) / 2.0
+
+mysqrt :: Double -> Double
+mysqrt c =
+    fix' (\a b -> a - b < 0.0000000000000000000000000000000001) (newton c) c
