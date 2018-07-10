@@ -225,5 +225,17 @@ nature = 0 : map (+ 1) nature
 merge' :: Ord a => [a] -> [a] -> [a]
 merge' x y = nub (merge x y)
 
-series :: Int -> [Double]
-series n = [ 1 / (2 * fromIntegral k + 1) * (-1) ^ k | k <- [0 .. n] ]
+series' :: Int -> [Double]
+series' n = [ 1 / (2 * fromIntegral k + 1) * (-1) ^ k | k <- [0 .. n] ]
+
+a :: Int -> [Double]
+a n =
+    [ (1 / fromIntegral (2 * k + 1)) * (0.5 ^ (2 * k + 1)) * (-1) ^ k
+    | k <- [0 .. n]
+    ]
+
+b :: Int -> [Double]
+b n =
+    [ (1 / fromIntegral (2 * k + 1)) * ((1 / 3.0) ^ (2 * k + 1)) * (-1) ^ k
+    | k <- [0 .. n]
+    ]
