@@ -223,10 +223,7 @@ mysqrt c =
 nature = 0 : map (+ 1) nature
 
 merge' :: Ord a => [a] -> [a] -> [a]
-merge' xs [] = xs
-merge' [] ys = ys
-merge' (x : xs) (y : ys) | x > y     = y : merge' (x : xs) ys
-                         | otherwise = x : merge' xs (y : ys)
+merge' x y = nub (merge x y)
 
--- ham = [1] merge' map (* 2) ham merge' map (* 3) ham merge' map (* 5) ham
--- ham = merge' [1] (map (* 2) ham)
+series :: Int -> [Double]
+series n = [ 1 / (2 * fromIntegral k + 1) * (-1) ^ k | k <- [0 .. n] ]
