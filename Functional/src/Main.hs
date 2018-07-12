@@ -239,3 +239,9 @@ b n =
     [ (1 / fromIntegral (2 * k + 1)) * ((1 / 3.0) ^ (2 * k + 1)) * (-1) ^ k
     | k <- [0 .. n]
     ]
+
+factors :: Integral a => a -> [a]
+factors n = [ x | x <- [1 .. n], mod n x == 0 ]
+
+isPrime :: Integral a => a -> Bool
+isPrime n = factors n == [1, n]
