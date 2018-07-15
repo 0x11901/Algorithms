@@ -254,3 +254,15 @@ isPrime' p =
 nextPrime :: Integer -> Integer
 nextPrime a | odd a     = if isPrime' a then a else nextPrime (a + 2)
             | otherwise = nextPrime (a + 1)
+
+sieve :: (Integral a) => [a] -> [a]
+sieve (p : xs) = p : sieve [ x | x <- xs, x `mod` p /= 0 ]
+
+primes = sieve [2 ..]
+
+positions 0 n = [[]]
+positions k n = [ x : xs | x <- [1 .. n], xs <- positions (k - 1) n ]
+
+noSameRow []       = True
+noSameRow (x : xs) = notElem x xs && noSameRow xs
+
