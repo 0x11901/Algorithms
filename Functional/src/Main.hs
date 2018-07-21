@@ -282,3 +282,14 @@ isSafe p ps = not (elem p ps || sameDiag p ps)
     sameDiag p ps = any (\(dist, q) -> abs (p - q) == dist) $ zip [1 ..] ps
 
 queens = positions' 8 8
+
+insert'' :: a -> [a] -> [[a]]
+insert'' n []        = [[n]]
+insert'' n (n' : ns) = (n : n' : ns) : [ n' : ns' | ns' <- insert'' n ns ]
+
+permutation :: [a] -> [[a]]
+permutation []       = [[]]
+permutation (x : xs) = concat [ insert'' x permux | permux <- permutation xs ]
+
+queens' :: Int -> [[Int]]
+queens' n = [xs| xs <- permutations [1..n], noSameDiag xs]
