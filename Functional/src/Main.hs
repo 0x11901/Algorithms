@@ -292,14 +292,17 @@ permutation []       = [[]]
 permutation (x : xs) = concat [ insert'' x permux | permux <- permutation xs ]
 
 queens' :: Int -> [[Int]]
-queens' n = [xs| xs <- permutations [1..n], noSameDiag xs]
+queens' n = [ xs | xs <- permutations [1 .. n], noSameDiag xs ]
 
 infixl 5 |*|
 (|*|) :: Num a => [[a]] -> [[a]] -> [[a]]
-(|*|) a b = [[ sum $ zipWith (*) ar bc | bc <- transpose b ] | ar <- a]
+(|*|) a b = [ [ sum $ zipWith (*) ar bc | bc <- transpose b ] | ar <- a ]
 
-unit = [[1,1],[1,0]]
+unit = [[1, 1], [1, 0]]
 
 fib 1 = unit
-fib n | even n = let m = fib (div n 2) in m |*| m
-      | otherwise = let m = fib (div (n-1) 2) in m |*| unit |*| m
+fib n | even n    = let m = fib (div n 2) in m |*| m
+      | otherwise = let m = fib (div (n - 1) 2) in m |*| unit |*| m
+
+skip :: Eq a => a -> [a] -> [a]
+skip x [] = [x]
