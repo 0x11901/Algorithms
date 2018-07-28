@@ -306,3 +306,8 @@ fib n | even n    = let m = fib (div n 2) in m |*| m
 
 skip :: Eq a => a -> [a] -> [a]
 skip x [] = [x]
+skip x (y : ys) | x == y    = y : ys
+                | otherwise = x : y : ys
+
+compress :: Eq a => [a] -> [a]
+compress = foldr skip []
