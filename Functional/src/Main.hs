@@ -311,3 +311,16 @@ skip x (y : ys) | x == y    = y : ys
 
 compress :: Eq a => [a] -> [a]
 compress = foldr skip []
+
+data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun
+    deriving (Show,Eq,Ord,Enum)
+
+tomorrow :: Day -> Day
+tomorrow Mon = Tue
+tomorrow Tue = Wed
+tomorrow Wed = Thu
+tomorrow Thu = Fri
+tomorrow Fri = Sat
+tomorrow Sat = Sun
+tomorrow Sun = Mon
+ 
