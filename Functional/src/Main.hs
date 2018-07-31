@@ -315,11 +315,9 @@ compress = foldr skip []
 data Day = Mon | Tue | Wed | Thu | Fri | Sat | Sun
     deriving(Show, Eq ,Ord ,Enum)
 
-tomorrow :: Day -> Day
-tomorrow Mon = Tue
-tomorrow Tue = Wed
-tomorrow Wed = Thu
-tomorrow Thu = Fri
-tomorrow Fri = Sat
-tomorrow Sat = Sun
 tomorrow Sun = Mon
+tomorrow d   = succ d
+
+yesterday Mon = Sun
+yesterday d   = pred d
+
