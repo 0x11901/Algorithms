@@ -321,3 +321,5 @@ tomorrow d   = succ d
 yesterday Mon = Sun
 yesterday d   = pred d
 
+combination :: Ord a => [a] -> [[a]]
+combination [] = [[]]
