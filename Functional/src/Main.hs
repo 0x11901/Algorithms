@@ -321,5 +321,18 @@ tomorrow d   = succ d
 yesterday Mon = Sun
 yesterday d   = pred d
 
-combination :: Ord a => [a] -> [[a]]
-combination [] = [[]]
+-- combination :: Ord a => [a] -> [[a]]
+-- combination []       = [[]]
+-- combination (x : xs) = [x] : combination xs
+
+-- combinations :: Ord a => Int -> [a] -> [[a]]
+-- combinations 0 _ = [[]]
+-- combinations n xs =
+--     [ y : ys | y : xs' <- tails xs, ys <- combinations (n - 1) xs' ]
+
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _  = return []
+combinations n xs = do
+    y : xs' <- tails xs
+    ys      <- combinations (n - 1) xs'
+    return (y : ys)
