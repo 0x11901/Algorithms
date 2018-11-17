@@ -30,9 +30,6 @@ mygcd x y = if y == 0 then x else mygcd y (mod x y)
 product' []       = 1
 product' (x : xs) = x * product' xs
 
--- total []       = 0
--- total (x : xs) = x + total xs
-
 total' []       n = n
 total' (x : xs) n = total' xs $! (x + n)
 total xs = total' xs 0
